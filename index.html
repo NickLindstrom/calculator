@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>Calc</h1>
+      <p id="resultArea"></p>
+      <input type="number" id="numOneField" />
+      <select id="operatorField">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+      <input type="number" id="numTwoField" />
+      <br />
+      <button id="submitBtn">Calc</button>
+      <button id="clearBtn">Clear</button>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const clearBtn = document.getElementById("clearBtn");
+        const submitBtn = document.getElementById("submitBtn");
+        const numOneField = document.getElementById("numOneField");
+        const operatorField = document.getElementById("operatorField");
+        const numTwoField = document.getElementById("numTwoField");
+        const resultArea = document.getElementById("resultArea");
+        submitBtn.addEventListener("click", () => {
+          if (!numOneField.value || !operatorField.value || !numTwoField.value)
+            return;
+          const numOne = parseInt(numOneField.value);
+          const numTwo = parseInt(numTwoField.value);
+          const resultSection = numOneField;
+          let result;
+          switch (operatorField.value) {
+            case "+":
+              result = numOne + numTwo;
+              break;
+            case "-":
+              result = numOne - numTwo;
+              break;
+            case "*":
+              result = numOne * numTwo;
+              break;
+            case "/":
+              result = numOne / numTwo;
+              break;
+            default:
+              break;
+          }
+          resultSection.value = result;
+          resultArea.innerText += `${numOne} ${operatorField.value} ${numTwo} = ${result}\n`;
+          numTwoField.value = ``;
+        });
+        clearBtn.addEventListener("click", () => {
+          numOneField.value = ``;
+          numTwoField.value = ``;
+          resultArea.innerText = ``;
+        });
+      });
+    </script>
+    <script type="text/javascript" src="main.js"></script>
+  </body>
+</html>
